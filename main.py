@@ -1,3 +1,6 @@
+from processing_main import *
+
+
 def main_menu(stage: int) -> None:
     # В зависимости от того, какой раз мы используем программу меню немного изменяется
     if stage == 0:
@@ -9,22 +12,22 @@ def main_menu(stage: int) -> None:
     # Вызываем функции в соответствии с командой
     match comanda:
         case 1:
-            print("Добавление книги")
+            add_book()
         case 2:
-            print("удаление книги")
+            delete_book()
         case 3:
-            print("поиск книги")
+            search_books()
         case 4:
-            print("отображение всех книг")
+            demonstration_books()
         case 5:
-            print("изменение статуса книги")
+            receiving_issuing_book()
         case 6:
-            print("Программа завершенна")
+            print("Программа завершенна. Спасибо за обращение, будем ждать Вас снова!")
             # Используем глобальную переменную для завершения программы
             global final
             final = 1
         case _:
-            print("Нет такой команды")
+            print("К сожалению, нет такой команды. Прочтите инструкцию и обратитесь снова. Будем ждать!")
 
 
 if __name__ == '__main__':
