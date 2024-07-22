@@ -1,4 +1,11 @@
 from models import Book
+import constants
+
+try:
+    f1 = open(constants.books)
+    f1.close()
+except FileNotFoundError:
+    raise FileNotFoundError(f"Ошибка! Файл {constants.books} не найден!")
 
 
 class Books:
@@ -72,12 +79,12 @@ class Books:
 
 
 def write_json(json_obj: str) -> None:
-    with open('books.json', 'wb') as jsonFile:
+    with open(constants.books, 'wb') as jsonFile:
         jsonFile.write(bytes(json_obj, 'utf-8'))
 
 
 def read_json() -> list and str:
-    with open('books.json', 'rb') as jsonFile:
+    with open(constants.books, 'rb') as jsonFile:
         json_obj: str = jsonFile.read().decode('utf-8')
         str_line: str = json_obj.replace('[', '').replace(']', '')
         number_lines: int = str_line.count('}')

@@ -1,6 +1,7 @@
 from processing_json import Books
 from models import Book
 
+
 current_books: Books = Books()
 
 

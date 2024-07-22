@@ -1,3 +1,12 @@
+import constants
+
+try:
+    f1 = open(constants.current_id)
+    f1.close()
+except FileNotFoundError:
+    raise FileNotFoundError(f"Ошибка! Файл {constants.current_id} не найден!")
+
+
 def check_status(status: str) -> str or None:
     if status not in {'в наличии', 'выдана'}:
         return "Некорректный статус книги"
@@ -5,8 +14,11 @@ def check_status(status: str) -> str or None:
 
 
 class Book:
-    with open('current_id.txt', 'r') as idFile:
-        counter: int = int(idFile.read())
+    with open(constants.current_id, 'r') as idFile:
+        try:
+            counter: int = int(idFile.read())
+        except ValueError:
+            raise ValueError(f"Ошибка! В файле {constants.current_id} ожидалось число!")
 
     def __init__(self, title: str = None, author: str = None, year: str or int = None, data: dict = None) -> None:
 
@@ -17,14 +29,14 @@ class Book:
         self.status: str
 
         if title and author and year:
-            self.id = Book.counter
             Book.counter += 1
+            self.id = Book.counter
             self.title = title
             self.author = author
             self.year = year
             self.status = 'в наличии'
 
-            with open('current_id.txt', 'w') as idFile:
+            with open(constants.current_id, 'w') as idFile:
                 idFile.write(str(Book.counter))
 
         if data:
