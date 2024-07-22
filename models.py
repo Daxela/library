@@ -48,28 +48,10 @@ class Book:
 
     def check(self) -> set:
         error: set[str or None] = set()
-        error.add(Book.check_id(self))
-        error.add(Book.check_title(self))
         error.add(Book.check_year(self))
-        error.add(Book.check_author(self))
         error.add(check_status(self.status))
         error.discard(None)
         return error
-
-    def check_id(self) -> str or None:
-        if not isinstance(self.id, int) or self.id < 0:
-            return "Некорректный id книги"
-        return None
-
-    def check_title(self) -> str or None:
-        if not isinstance(self.title, str):
-            return "Некорректное название книги"
-        return None
-
-    def check_author(self) -> str or None:
-        if not isinstance(self.author, str):
-            return "Некорректно указан автор книги"
-        return None
 
     def check_year(self) -> str or None:
         if not isinstance(self.year, int) or self.year < 1000 or self.year > 10000:
